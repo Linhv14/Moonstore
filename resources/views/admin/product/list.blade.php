@@ -33,8 +33,14 @@
 							</td>
 							<td>${{$item->price}}.00</td>
 							<td>
-								<a class="btn-order" href="{{route('route.admin.edit_product',['id' => $item->id])}}">Sửa</a>
-								<a class="btn-order" href="{{route('route.admin.delete_product',['id' => $item->id])}}">Xóa</a>
+								<a class="btn-order" 
+									href="/admin-edit-product/{{$item->id}}">
+									Sửa
+								</a>
+								<a class="btn-order" 
+									href="/admin-delete-product/{{$item->id}}">
+									Xóa
+								</a>
 							</td>
 						</tr>
 					@endforeach

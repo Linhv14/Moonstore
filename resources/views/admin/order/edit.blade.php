@@ -19,7 +19,7 @@
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-body">
-                    <form action="{{route('route.admin.update_order',['id' => $bill->bill_id])}}" method="POST"
+                    <form action="/admin-update-order/{{$bill->id}}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">

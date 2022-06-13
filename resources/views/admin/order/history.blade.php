@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Danh sách đơn hàng đang giao</h1>          
+        <h1 class="h3 mb-0 text-gray-800">Lịch sử đơn hàng</h1>          
     </div>
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-4">
@@ -20,7 +20,7 @@
 					  <th scope="col">Trạng thái</th>
 					  <th scope="col">Nhân viên xác nhận</th>
                       <th scope="col">Thời gian đặt</th>
-                      <th scope="col">Thời gian giao</th>
+                      <th scope="col">Thời gian nhận</th>
 					</tr>
 				  </thead>
 				  <tbody>
@@ -32,13 +32,13 @@
 							<td>{{$item->address}}</td>
 							<td>{{$item->status}}</td>
 							<td>{{$item->staff}}</td>
-							<td>{{\Carbon\Carbon::parse($item->created_at)->format('H:i d/m/Y ')}}</td>
-							<td>{{\Carbon\Carbon::parse($item->time_deliver)->format('H:i d/m/Y ')}}</td>
+							<td>{{$item->created_at}}</td>
+							<td>{{\Carbon\Carbon::parse($item->time_receive)->format('H:i:s d/m/Y')}}</td>
 							<td>
-								<a class="btn-order" href="{{route('route.admin.back_to_order',['id'=>$item->bill_id])}}">Hủy giao hàng</a><br>
-								<a class="btn-order" href="{{route('route.admin.delete_deliver',['id'=>$item->bill_id])}}">Hủy đơn hàng</a><br>
-								<a class="btn-order" href="{{route('route.admin.detail_order',['id'=>$item->bill_id])}}">Xem chi tiết</a><br>
-								<a class="btn-order" href="{{route('route.admin.confirm_order',['id'=>$item->bill_id])}}">Xác nhận đã giao</a>
+								<a class="btn-order" 
+									href="/admin-detail-order/{{$item->id}}">
+									Chi tiết
+								</a><br>
 							</td>
 						</tr>
 					@endforeach		

@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Danh sách băng rôn</h1>          
+        <h1 class="h3 mb-0 text-gray-800">Danh sách các danh mục sản phẩm</h1>          
 	</div>
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-4">
@@ -14,23 +14,27 @@
 				  <thead>
 					<tr>
 					  <th scope="col">STT</th>
-					  <th scope="col">Tiêu đề</th>
-					  <th scope="col">Mô tả</th>
+					  <th scope="col">Tên danh mục</th>
 					  <th scope="col">Hình ảnh</th>
 					</tr>
 				  </thead>
 				  <tbody>
-					@foreach ($banner as $item)
+					@foreach ($category as $item)
 						<tr>
 							<td scope="row">{{$loop->iteration}}</td>
-							<td>{{$item->title}}</td>
-							<td>{{$item->description}}</td>
+							<td>{{$item->name}}</td>
 							<td>
-								<img src="{{asset('image/banner/'.$item->image)}}" width="200px" height="100px">
+								<img src="{{asset('image/category/'.$item->image)}}" width="200px" height="100px">
 							</td>
 							<td>
-								<a class="btn-order" href="{{route('route.admin.edit_banner',['id' => $item->id])}}">Sửa</a>
-								<a class="btn-order" href="{{route('route.admin.delete_banner',['id' => $item->id])}}">Xóa</a>
+								<a class="btn-order" 
+									href="/admin-edit-category/{{$item->id}}">
+									Sửa
+								</a>
+								<a class="btn-order" 
+									href="/admin-delete-category/{{$item->id}}">
+									Xóa
+								</a>
 							</td>
 						</tr>
 					@endforeach		

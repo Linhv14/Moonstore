@@ -33,10 +33,22 @@
 							<td>{{$item->status}}</td>
 							<td>{{\Carbon\Carbon::parse($item->created_at)->format('H:i d/m/Y ')}}</td>
 							<td>
-								<a class="btn-order" href="{{route('route.admin.edit_order',['id'=>$item->bill_id])}}">Sửa thông tin</a><br>
-								<a class="btn-order" href="{{route('route.admin.delete_order',['id'=>$item->bill_id])}}">Xóa đơn hàng</a><br>
-								<a class="btn-order" href="{{route('route.admin.detail_order',['id'=>$item->bill_id])}}">Xem chi tiết</a><br>
-								<a class="btn-order" href="{{route('route.admin.confirm_deliver',['id'=>$item->bill_id])}}">Xác nhận</a>
+								<a class="btn-order" 
+									href="/admin-edit-order/{{$item->id}}">
+									Sửa thông tin
+								</a><br>
+								<a class="btn-order" 
+									href="/admin-delete-order/{{$item->id}}">
+									Xóa đơn hàng
+								</a><br>
+								<a class="btn-order" 
+									href="/admin-detail-order/{{$item->id}}">
+									Xem chi tiết
+								</a><br>
+								<a class="btn-order" 
+									href="/admin-confirm-deliver/{{$item->id}}">
+									Xác nhận
+								</a>
 							</td>
 						</tr>
 					@endforeach		

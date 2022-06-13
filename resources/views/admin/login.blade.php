@@ -27,7 +27,7 @@
                             <div class="text-center">
                                 <h2 class="h4 text-gray-900 mb-4">Chào mừng!</h2>
                             </div>
-                            <form class="user" method="POST" action="{{route('route.admin.login_admin_process')}}">
+                            <form class="user" method="POST" action="login-admin">
                                 @csrf
                                 @if ($errors->any())
                                 <div class="alert alert-danger">

@@ -32,7 +32,8 @@
 							<td>{{$item->name}}</td>
 							<td>{{$item->email}}</td>
 							<td>
-                                <form action="{{route('route.admin.update_type_user',['id' => $item->id])}}" method="post" enctype="multipart/form-data">
+                                <form action="/admin-update-type-user/{{$item->id}}" 
+									method="post" enctype="multipart/form-data">
 									@csrf	
 									<select id="type_user" name="type_user">
 										@if ($item->type_user == "Admin")
@@ -58,8 +59,14 @@
 							<td>{{$item->country}}</td>
                             <td>{{$item->created_at}}</td>
 							<td>
-								<a class="btn-order" href="{{route('route.admin.edit_user',['id' => $item->id])}}">Sửa</a>
-								<a class="btn-order" href="{{route('route.admin.delete_user',['id' => $item->id])}}">Xóa</a>
+								<a class="btn-order" 
+									href="/admin-edit-user/{{$item->id}}">
+									Sửa
+								</a>
+								<a class="btn-order" 
+									href="/admin-delete-user/{{$item->id}}">
+									Xóa
+								</a>
 							</td>
 						</tr>
 					@endforeach		

@@ -19,7 +19,7 @@
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-body">
-                    <form action="{{route('route.admin.save_product')}}" method="POST" enctype="multipart/form-data">
+                    <form action="/admin-save-product" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>Tên sản phẩm</label>
@@ -36,13 +36,18 @@
                         </div>
                         <div class="form-group">
                             <label>Thương hiệu</label>
-                            <input type="text" class="form-control" name="txtBrand" placeholder="Vui lòng nhập thương hiệu"
+                            <input type="text" class="form-control" 
+                                name="txtBrand" 
+                                placeholder="Vui lòng nhập thương hiệu"
                                 value="{{old('txtBrand')}}">
                         </div>
                         <div class="form-group">
                             <label>Mô tả</label>
-                            <input type="text" class="form-control" name="txtDescription"
-                                placeholder="Vui lòng nhập mô tả" value="{{old('txtDescription')}}">
+                            <input type="text" class="form-control" 
+                                name="txtDescription"
+                                placeholder="Vui lòng nhập mô tả" 
+                                value="{{old('txtDescription')}}"
+                            >
                         </div>
                         <label>Giá</label>
                         <div class="input-group mb-3">

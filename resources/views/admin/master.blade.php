@@ -18,7 +18,7 @@
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{route('route.admin.index')}}">
+                href="/admin-dashboard">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fab fa-shopify"></i>
                 </div>
@@ -32,8 +32,8 @@
                 </a>
                 <div id="collapseZoro" class="collapse">
                     <div class="bg-white py-2 collapse-inner rounded">              
-                        <a class="collapse-item" href="{{route('route.admin.list_category')}}">Danh sách các danh mục</a>
-                        <a class="collapse-item" href="{{route('route.admin.add_category')}}">Thêm danh mục</a>
+                        <a class="collapse-item" href="/admin-list-category">Danh sách các danh mục</a>
+                        <a class="collapse-item" href="/admin-add-category">Thêm danh mục</a>
                     </div>
                 </div>
             </li>
@@ -45,8 +45,8 @@
                 </a>
                 <div id="collapseOne" class="collapse">
                     <div class="bg-white py-2 collapse-inner rounded">              
-                        <a class="collapse-item" href="{{route('route.admin.list_product')}}">Danh sách sản phẩm</a>
-                        <a class="collapse-item" href="{{route('route.admin.add_product')}}">Thêm sản phẩm</a>
+                        <a class="collapse-item" href="/admin-list-product">Danh sách sản phẩm</a>
+                        <a class="collapse-item" href="/admin-add-product">Thêm sản phẩm</a>
                     </div>
                 </div>
             </li>
@@ -58,8 +58,8 @@
                 </a>
                 <div id="collapseTwo" class="collapse">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('route.admin.list_banner')}}">Danh sách băng rôn</a>
-                        <a class="collapse-item" href="{{route('route.admin.add_banner')}}">Thêm băng rôn</a>
+                        <a class="collapse-item" href="/admin-list-banner">Danh sách băng rôn</a>
+                        <a class="collapse-item" href="/admin-add-banner">Thêm băng rôn</a>
                     </div>
                 </div>
             </li>
@@ -71,8 +71,8 @@
                 </a>
                 <div id="collapseThird" class="collapse">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('route.admin.list_post')}}">Danh sách bài đăng</a>
-                        <a class="collapse-item" href="{{route('route.admin.add_post')}}">Thêm bài đăng</a>
+                        <a class="collapse-item" href="/admin-list-post">Danh sách bài đăng</a>
+                        <a class="collapse-item" href="/admin-add-post">Thêm bài đăng</a>
                     </div>
                 </div>
             </li>
@@ -84,9 +84,9 @@
                 </a>
                 <div id="collapseFour" class="collapse">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('route.admin.list_order')}}">Duyệt đơn hàng</a>
-                        <a class="collapse-item" href="{{route('route.admin.list_deliver')}}">Đơn hàng đang giao</a>
-                        <a class="collapse-item" href="{{route('route.admin.history_order')}}">Lịch sử đơn hàng</a>
+                        <a class="collapse-item" href="/admin-list-order">Duyệt đơn hàng</a>
+                        <a class="collapse-item" href="/admin-list-deliver">Đơn hàng đang giao</a>
+                        <a class="collapse-item" href="/admin-history-order">Lịch sử đơn hàng</a>
                     </div>
                 </div>
             </li>
@@ -99,7 +99,7 @@
                 </a>
                 <div id="collapseFive" class="collapse">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('route.admin.list_user')}}">Danh sách người dùng</a>                     
+                        <a class="collapse-item" href="/admin-list-user">Danh sách người dùng</a>                     
                     </div>
                 </div>
             </li>
@@ -282,7 +282,7 @@
                     <div class="modal-body">Chọn "tiếp tục" nếu bạn muốn đăng xuất hoặc thay đổi tài khoản</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                        <a class="btn btn-primary" href="{{route('route.admin.logout_admin')}}">Tiếp tục</a> 
+                        <a class="btn btn-primary" href="/logout-admin">Tiếp tục</a> 
                     </div>
                 </div>
             </div>

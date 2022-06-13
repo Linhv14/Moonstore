@@ -14,7 +14,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                <a href="{{route('route.admin.list_category')}}">Quản lý danh mục</a></div>
+                                <a href="/admin-list-category">Quản lý danh mục</a></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
@@ -30,7 +30,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                <a href="{{route('route.admin.list_product')}}">Quản lý sản phẩm</a>
+                                <a href="/admin-list-product">Quản lý sản phẩm</a>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -47,7 +47,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="font-weight-bold text-success text-uppercase mb-1">
-                                <a href="{{route('route.admin.list_banner')}}">Quản lý băng rôn</a>
+                                <a href="/admin-list-banner">Quản lý băng rôn</a>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -64,7 +64,8 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="font-weight-bold text-info text-uppercase mb-1"><a href="{{route('route.admin.list_user')}}">Quản lý người dùng</a>
+                            <div class="font-weight-bold text-info text-uppercase mb-1">
+                                <a href="/admin-list-user">Quản lý người dùng</a>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -82,7 +83,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="font-weight-bold text-warning text-uppercase mb-1">
-                                <a href="{{route('route.admin.list_post')}}">Quản lý bài viết</a>
+                                <a href="/admin-list-post">Quản lý bài viết</a>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -99,7 +100,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="font-weight-bold text-warning text-uppercase mb-1">
-                                <a href="{{route('route.admin.list_order')}}">Quản lý đơn hàng</a>
+                                <a href="/admin-list-order">Quản lý đơn hàng</a>
                             </div>
                         </div>
                         <div class="col-auto">
