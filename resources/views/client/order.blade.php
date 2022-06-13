@@ -68,7 +68,7 @@
                                 <p class="price product-price">${{$product->price}}.00</p>
                                 <div class="addto-cart">
                                     <a class="latest-checkout" 
-                                        href="{{route('route.client.product_detail',['id' => $product->id])}}">
+                                        href="/product/{{$product->id}}">
                                         Xem ngay
                                     </a>
                                 </div>
@@ -148,7 +148,7 @@
                                 @endphp
                                 <tr>
                                     <td class="text-left">
-                                        <a href="{{route('route.client.product_detail',['id' => $item->product_id])}}">
+                                        <a href="/product/{{$item->id}}">
                                             {{$item->title}}
                                         </a>
                                     </td>

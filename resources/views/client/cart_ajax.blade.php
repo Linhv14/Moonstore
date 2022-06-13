@@ -49,7 +49,7 @@
                 <li class="subtotal">Thuế(0%) <span>$0.00</span></li>
                 <li class="cart-total">Tổng giá <span>${{Session::get('Cart')->totalPrice}}.00</span></li>
             </ul>
-            <a href="{{route('route.client.checkout')}}" class="proceed-btn">Xử lý đơn hàng</a>
+            <a href="/checkout" class="proceed-btn">Xử lý đơn hàng</a>
         </div>
     </div>
 </div>
@@ -58,7 +58,7 @@
     <center class="empty-cart wrap">
         <h2>Giỏ hàng trống</h2>
         <div class="shopping-now">
-            <a href="{{route('route.client.index')}}">Mua ngay!</a>
+            <a href="/">Mua ngay!</a>
         </div>
     </center>
 </div>

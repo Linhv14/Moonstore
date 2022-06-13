@@ -63,10 +63,15 @@
                         <div class="col-xs-8">
                             <div class="caption product-detail">
                                 <h4 class="product-name"><a class="latest-checkout"
-                                        href="{{route('route.client.product_detail',['id' => $item->id])}}">{{$item->title}}</a>
+                                        href="/product/{{$item->id}}">{{$item->title}}</a>
                                 </h4>
                                 <p class="price product-price">${{$item->price}}.00</p>
-                                <div class="addto-cart"><a class="latest-checkout" href="{{route('route.client.product_detail',['id' => $item->id])}}">Xem ngay</a></div>
+                                <div class="addto-cart">
+                                    <a class="latest-checkout" 
+                                        href="/product/{{$item->id}}">
+                                        Xem ngay
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -77,7 +82,7 @@
         <div class="col-sm-9 empty-order" id="content">
                 <center>
                     <h1 class="empty-order-title">Bạn không có đơn hàng nào</h1>
-                    <div class="empty-order-btn"><a href="{{route('route.client.index')}}">Mua hàng ngay</a></div>
+                    <div class="empty-order-btn"><a href="/">Mua hàng ngay</a></div>
                 </center>
         </div>
     </div>

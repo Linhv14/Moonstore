@@ -73,7 +73,7 @@
                                         <ul class="button-group">
                                             <li>
                                                 <button type="button" class="addtocart-btn">
-                                                    <a href="{{route('route.client.product_detail',['id' => $item->id])}}">
+                                                    <a href="/product/{{$item->id}}">
                                                         Xem chi tiết
                                                     </a>
                                                 </button>
@@ -149,7 +149,7 @@
                                 <ul class="button-group">
                                     <li>
                                         <button type="button" class="addtocart-btn">
-                                            <a href="{{route('route.client.product_detail',['id' => $item->id])}}">Xem chi tiết</a>
+                                            <a href="/product/{{$item->id}}">Xem chi tiết</a>
                                         </button>
                                         <button type="button" class="addtocart-btn"
                                             onclick="addCart({{$item->id}})">

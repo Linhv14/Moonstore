@@ -57,13 +57,13 @@
                                             <li><a href="javascript:" onclick="showMsg()">Tài khoản</a></li>
                                             <li><a href="javascript:" onclick="showMsg()">Khuyến mãi</a></li>
                                             <li><a href="javascript:" onclick="showMsg()">Chính sách</a></li>
-                                            <li><a href="{{route('route.client.order')}}">Đơn hàng</a></li>
-                                            <li><a href="{{route('route.client.history_order')}}">Lịch sử mua hàng</a>
+                                            <li><a href="/order">Đơn hàng</a></li>
+                                            <li><a href="/history-order">Lịch sử mua hàng</a>
                                             </li>
-                                            <li><a href="{{route('route.logout_client')}}">Đăng xuất</a></li>
+                                            <li><a href="/logout">Đăng xuất</a></li>
                                             @else
-                                            <li><a href="{{route('route.client.login_client')}}">Đăng nhập</a></li>
-                                            <li><a href="{{route('route.client.register_client')}}">Đăng ký</a></li>
+                                            <li><a href="/login">Đăng nhập</a></li>
+                                            <li><a href="/register">Đăng ký</a></li>
                                             @endif
                                         </ul>
                                     </li>
@@ -78,7 +78,7 @@
             <div class="header-inner">
                 <div class="col-sm-3 col-xs-3 header-left">
                     <div id="logo">
-                        <a href="{{route('route.client.index')}}">
+                        <a href="/">
                             <img src="{{asset('client-style/image/logo.png')}}" class="img-responsive" />
                         </a>
                     </div>
@@ -201,7 +201,7 @@
                                 <li>
                                     <p class="text-right">
                                         <span class="btn-viewcart">
-                                            <a href="{{route('route.client.cart')}}">
+                                            <a href="/cart">
                                                 <strong>
                                                     <i class="fas fa-shopping-cart"></i> 
                                                     Xem giỏ hàng
@@ -209,7 +209,7 @@
                                             </a>
                                         </span>
                                         <span class="btn-checkout">
-                                            <a href="{{route('route.client.checkout')}}">
+                                            <a href="/checkout">
                                                 <strong>
                                                     <i class="fas fa-share"></i>
                                                     Thanh toán
@@ -237,7 +237,7 @@
             <div class="navbar-collapse">
                 <ul class="main-navigation">
                     <li>
-                        <a href="{{route('route.client.index')}}" class="parent">Trang chủ</a>
+                        <a href="/" class="parent">Trang chủ</a>
                     </li>
                     <li>
                         <a href="/category/all" class="parent">Bộ sưu tập</a>
@@ -258,9 +258,9 @@
                     <li>
                         <a href="javascript:" onclick="showMsg()" class="parent">Trang</a>
                         <ul>
-                            <li><a href="{{route('route.client.cart')}}">Giỏ hàng</a></li>
-                            <li><a href="{{route('route.client.order')}}">Đơn hàng</a></li>
-                            <li><a href="{{route('route.client.checkout')}}">Thanh toán</a></li>
+                            <li><a href="/cart">Giỏ hàng</a></li>
+                            <li><a href="/order">Đơn hàng</a></li>
+                            <li><a href="/checkout">Thanh toán</a></li>
                             <li><a href="javascript:" onclick="showMsg()">Bài viết</a></li>
                         </ul>
                     </li>
@@ -269,7 +269,7 @@
                         <ul>
                             <li><a href="javascript:" onclick="showMsg()">Thông tin</a></li>
                             <li><a href="javascript:" onclick="showMsg()">Liên hệ</a> </li>
-                            <li><a href="{{route('route.client.forget_password')}}">Quên mật khẩu</a></li>
+                            <li><a href="/forget-password">Quên mật khẩu</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -395,9 +395,9 @@
                         <li><a href="javascript:" onclick="showMsg()">Hồ sơ</a></li>
                         <li><a href="javascript:" onclick="showMsg()">Tài khoản</a></li>
                         <li>
-                            <a href="{{route('route.client.forget_password')}}">Quên mật khẩu</a>
+                            <a href="/forget-password">Quên mật khẩu</a>
                         </li>
-                        <li><a href="{{route('route.client.register_client')}}">Đăng ký</a></li>
+                        <li><a href="/register">Đăng ký</a></li>
                         <li><a href="javascript:" onclick="showMsg()">Đổi mật khẩu</a></li>
                     </ul>
                 </div>
@@ -430,7 +430,7 @@
         <div class="footer-bottom">
             <div id="bottom-footer">
                 <ul class="footer-link">
-                    <li><a href="{{route('route.client.index')}}">Trang chủ</a></li>
+                    <li><a href="/">Trang chủ</a></li>
                     <li><a href="javascript:" onclick="showMsg()">Thông tin</a></li>
                     <li><a href="javascript:" onclick="showMsg()">Công việc</a></li>
                     <li><a href="javascript:" onclick="showMsg()">Đội ngũ</a></li>

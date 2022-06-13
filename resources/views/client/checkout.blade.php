@@ -62,11 +62,19 @@
                         </div>
                         <div class="col-xs-8">
                             <div class="caption product-detail">
-                                <h4 class="product-name"><a class="latest-checkout"
-                                        href="{{route('route.client.product_detail',['id' => $item->id])}}">{{$product[0]->title}}</a>
+                                <h4 class="product-name">
+                                    <a class="latest-checkout"
+                                        href="/product/{{$item->id}}">
+                                        {{$product[0]->title}}
+                                    </a>
                                 </h4>
                                 <p class="price product-price">${{$item->price}}.00</p>
-                                <div class="addto-cart"><a class="latest-checkout" href="{{route('route.client.product_detail',['id' => $item->id])}}">Xem ngay</a></div>
+                                <div class="addto-cart">
+                                    <a class="latest-checkout" 
+                                        href="/product/{{$item->id}}">
+                                        Xem ngay
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -85,7 +93,7 @@
                     @endforeach
                 </div>
                 @endif
-            <form action="{{route('route.client.order_confirm')}}" method="post">
+            <form action="/order-confirm" method="post">
                 @csrf
                 <div id="accordion" class="panel-group">
                     <div class="panel panel-default">
@@ -152,7 +160,7 @@
                                             @foreach(Session::get('Cart')->products as $item)
                                             <tr>
                                                 <td class="text-left">
-                                                    <a href="{{route('route.client.product_detail',['id' => $item['productInfo']->id])}}">{{$item['productInfo']->title}}</a>
+                                                    <a href="/product/{{$item['productInfo']->id}}">{{$item['productInfo']->title}}</a>
                                                 </td>
                                                 <td class="text-left">{{$category[$item['productInfo']->category]}}</td>
                                                 <td class="text-right">{{$item['quanty']}}</td>
@@ -171,8 +179,12 @@
                                                 <td class="text-right">$0.00</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-right" colspan="4"><strong>Tổng tiền:</strong></td>
-                                                <td class="text-right">${{Session::get('Cart')->totalPrice}}.00</td>
+                                                <td class="text-right" colspan="4">
+                                                    <strong>Tổng tiền:</strong>
+                                                </td>
+                                                <td class="text-right highlight-blue">
+                                                    ${{Session::get('Cart')->totalPrice}}.00
+                                                </td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -193,7 +205,7 @@
         <div class="col-sm-9 empty-order" id="content">
             <center>
                 <h1 class="empty-order-title">Bạn không có đơn hàng nào</h1>
-                <div class="empty-order-btn"><a href="{{route('route.client.index')}}">Mua hàng ngay</a></div>
+                <div class="empty-order-btn"><a href="/">Mua hàng ngay</a></div>
             </center>         
         </div> 
         @endif

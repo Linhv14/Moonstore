@@ -9,8 +9,8 @@
         <div class="columnblock-title">Dịch vụ</div>
         <div class="category_block">
           <ul class="box-category">
-            <li><a href="{{route('route.client.login_client')}}">Đăng nhập</a></li>
-            <li><a href="{{route('route.client.register_client')}}">Đăng ký</a></li>
+            <li><a href="/login">Đăng nhập</a></li>
+            <li><a href="/register">Đăng ký</a></li>
             <li><a href="#">Tài khoản</a></li>
             <li><a href="#">Phương thức thanh toán</a></li>
             <li><a href="#">Chi nhánh</a></li>

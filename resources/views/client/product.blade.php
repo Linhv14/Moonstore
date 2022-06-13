@@ -55,8 +55,11 @@
                             @foreach ($product as $item)
                                 @if ($item != $detail)
                                 <div class="item">
-                                <div class="image-additional"><a class="thumbnail fancybox" href="{{route('route.client.product_detail',['id' => $item->id])}}"> 
-                                    <img src="{{asset('image/product/'.$item->image)}}"/></a></div>
+                                <div class="image-additional">
+                                    <a class="thumbnail fancybox" href="/product/{{$item->id}}"> 
+                                        <img src="{{asset('image/product/'.$item->image)}}"/>
+                                    </a>
+                                </div>
                             </div>
                                 @endif
                             @endforeach
@@ -88,7 +91,7 @@
                     <ul class="list-unstyled product_info">
                         <li>
                             <label>Thương hiệu:</label>
-                            <span> <a href="#">{{$detail->brand}}</a></span></li>
+                            <span> <a href="javascript:">{{$detail->brand}}</a></span></li>
                         <li>
                             <label>Loại sản phẩm:</label>
                             <span> {{$category_detail}}</span></li>
@@ -201,8 +204,11 @@
                                 </a>
                                 <ul class="button-group">
                                     <li>
-                                        <button class="addtocart-btn"><a href="{{route('route.client.product_detail',['id' => $item->id])}}">Xem chi tiết</a></button>
-                                        <button class="addtocart-btn" onclick="addCart({{$item->id}})">
+                                        <button class="addtocart-btn">
+                                            <a href="/product/{{$item->id}}">Xem chi tiết</a>
+                                        </button>
+                                        <button class="addtocart-btn" 
+                                            onclick="addCart({{$item->id}})">
                                             <a href="javascript:">Thêm vào giỏ hàng</a>
                                         </button>
                                     </li>

@@ -64,7 +64,7 @@
                                     <li class="cart-total">Tổng giá
                                         <span>${{Session::get('Cart')->totalPrice}}.00</span></li>
                                 </ul>
-                                <a href="{{route('route.client.checkout')}}" class="proceed-btn">Xử lý đơn hàng</a>
+                                <a href="/checkout" class="proceed-btn">Xử lý đơn hàng</a>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <center class="empty-cart wrap">
                             <h2>Giỏ hàng trống</h2>
                             <div class="shopping-now">
-                                <a href="{{route('route.client.index')}}">Mua ngay!</a>
+                                <a href="/">Mua ngay!</a>
                             </div>
                         </center>
                     </div>
@@ -121,7 +121,7 @@
                                 <ul class="button-group">
                                     <li>
                                         <button type="button" class="addtocart-btn">
-                                            <a href="{{route('route.client.product_detail',['id' => $item->id])}}">Xem chi tiết</a>
+                                            <a href="/product/{{$item->id}}">Xem chi tiết</a>
                                         </button>
                                         <button type="button" class="addtocart-btn" onclick="addCart({{$item->id}})">
                                                     <a href="javascript:">Thêm vào giỏ hàng</a>

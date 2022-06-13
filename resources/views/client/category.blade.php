@@ -48,7 +48,7 @@
                                 </p>
                                 <div class="addto-cart">
                                     <a class="latest-checkout" 
-                                        href="{{route('route.client.product_detail',['id' => $item->id])}}">
+                                        href="/product/{{$item->id}}">
                                         Xem ngay
                                     </a>
                                 </div>
