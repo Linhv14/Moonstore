@@ -20,7 +20,7 @@ class AuthClientIn
         if (Auth::check()) {           
             return $next($request);                 
         } else {
-            return redirect()->route('route.client.login_client');
+            return redirect('login');
         }
         
     }

@@ -3,13 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\userRequest;
 use App\Http\Requests\accountRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Users;
+use Illuminate\Support\Facades\Crypt;
+
 
 class LoginClientController extends Controller
 {   
+
+    public function home() {
+        return view('client.index');
+    }
+
     public function login() {
-        return view('client.login_client');
+        return view('client.login');
     }
 
     public function authenticate(accountRequest $request) {
@@ -21,7 +30,7 @@ class LoginClientController extends Controller
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) 
         {   
             $request->session()->regenerate();          
-            return redirect()->route('route.client.index');    
+            return redirect('/');    
         }
 
         return back()->withErrors([
@@ -30,20 +39,34 @@ class LoginClientController extends Controller
     }
 
     public function register() {
-        return view('client.register_client');
+        return view('client.register');
+    }
+
+    public function save(userRequest $request) {
+        $user = [
+            'password'  => bcrypt($request->password),
+            'name'      => $request->name,
+            'address'   => $request->address,
+            'phone'     => $request->phone,
+            'country'   => $request->country,
+            'email'     => $request->email,
+            'city'      => $request->city, 
+        ];
+        Users::create($user);
+        return redirect('login');
     }
 
     public function redirect(Request $request)
     {
         $value = $request->account;
         if ($value == 'register') {
-            return redirect()->route('route.client.register_client');
+            return redirect('/register');
         } else {
-            return redirect()->route('route.client.index');
+            return redirect('/');
         }
     }
 
-    public function logoutClient(Request $request) {
+    public function logout(Request $request) {
 
         Auth::logout();
 
@@ -51,11 +74,11 @@ class LoginClientController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect()->route('route.client.login_client');
+        return redirect('login');
 
     }
 
-    public function fotgetPassword(Request $request) {
+    public function forgetPassword(Request $request) {
         return view('client.forget_password');
     }
 }

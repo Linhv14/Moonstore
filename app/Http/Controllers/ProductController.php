@@ -12,22 +12,18 @@ use File;
 
 class ProductController extends Controller
 {
-    public function listProduct() {
+    public function list() {
         $product = DB::table('product')
             ->leftJoin('category', 'product.category', '=', 'category.id')
             ->select('product.*', 'category.name')
             ->get();
-        return view('admin.list_product', ['product' => $product]);
-    }
-    
-    public function addProduct() {
-        return view('admin.add_product');
+        return view('admin.product.list', ['product' => $product]);
     }
 
-    public function saveProduct(productRequest $request) {
-        $nameImg = $request->fileImg->getClientOriginalName();
+    public function save(productRequest $request) {
+        $nameImage = $request->fileImg->getClientOriginalName();
         $file = $request->file('fileImg');
-        $file->move('image/product', $nameImg);
+        $file->move('image/product', $nameImage);
 
         Product::create([
             'title'         => $request->txtTitle,
@@ -35,29 +31,29 @@ class ProductController extends Controller
             'brand'         => $request->txtBrand,
             'description'   => $request->txtDescription,
             'price'         => $request->txtPrice,
-            'image'         => $nameImg,
+            'image'         => $nameImage,
         ]);      
-        return redirect()->route('route.admin.list_product');
+        return redirect('admin-list-product');
     }
 
-    public function deleteProduct($id) {
-        $myImg = Product::find($id)->image;
-        File::delete('image/product/'.$myImg);
+    public function delete($id) {
+        $image = Product::find($id)->image;
+        File::delete('image/product/'.$image);
         Product::find($id)->delete();
-        return redirect()->route('route.admin.list_product');
+        return redirect('admin-list-product');
     }
 
-    public function editProduct($id) {
-        $data = Product::find($id);
-        return view('admin.edit_product',['data' => $data]);
+    public function edit($id) {
+        $product = Product::find($id);
+        return view('admin.product.edit',['product' => $product]);
     }
 
-    public function updateProduct(edit_productRequest $request, $id) {
-        $myImg = Product::find($id)->image;
+    public function update(edit_productRequest $request, $id) {
+        $oldImage = Product::find($id)->image;
         if ($request->fileImg == null) {
-            $image = $myImg; 
+            $image = $oldImage; 
         } else {
-            File::delete('image/product/'.$myImg);
+            File::delete('image/product/'.$oldImage);
             $image = $request->fileImg->getClientOriginalName();
             $file = $request->file('fileImg');
             $file->move('image/product',$image);
@@ -70,22 +66,19 @@ class ProductController extends Controller
             'price'         => $request->txtPrice,
             'image'         => $image,
         ]);
-        return redirect()->route('route.admin.list_product');
+        return redirect('admin-list-product');
     }
 
-    public function showProductDetail(Request $request, $id) {
-
+    public function detail($id) {
         $detail = Product::find($id);
         if ($detail) {
             $category_detail = Category::find($detail->category)->name;
-        
             return view('client.product',[
                 'detail'           => $detail,
                 'category_detail'  => $category_detail,
             ]);
         } else {
             abort(404);
-        }
-        
+        }    
     }
 }

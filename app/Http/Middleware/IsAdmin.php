@@ -24,8 +24,8 @@ class IsAdmin
             {
                 return $next($request);
             }
-            return redirect()->route('route.admin.index');
+            return redirect('admin-dashboard');
         }
-        return redirect()->route('route.admin.login_admin');   
+        return redirect('login-admin');   
     }
 }

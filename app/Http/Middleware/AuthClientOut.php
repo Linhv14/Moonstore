@@ -18,7 +18,7 @@ class AuthClientOut
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {           
-            return redirect()->route('route.client.index');               
+            return redirect('/');               
         } else {           
             return $next($request);
         }       

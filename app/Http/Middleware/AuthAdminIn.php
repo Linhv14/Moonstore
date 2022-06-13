@@ -17,15 +17,15 @@ class AuthAdminIn
      */
     public function handle(Request $request, Closure $next)
     {
-        
+       
         if (Auth::check()) {
             $type_user = Auth::user()->type_user;
             if ($type_user == 'Admin' || $type_user == 'Staff')
             {
                 return $next($request);
             }
-            return redirect()->route('route.admin.login_admin');
+            return redirect('login-admin');
         }
-        return redirect()->route('route.admin.login_admin');   
+        return redirect('login-admin');   
     }
 }

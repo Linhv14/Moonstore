@@ -10,15 +10,8 @@ use File;
 
 class BannerController extends Controller
 {
-    public function listBanner() {
-        return view('admin.banner.list_banner');
-    }
 
-    public function addBanner() {
-        return view('admin.banner.add_banner');
-    }
-
-    public function saveBanner(bannerRequest $request) {
+    public function save(bannerRequest $request) {
 
         $nameImg = $request->fileImg->getClientOriginalName();
         $file = $request->file('fileImg');
@@ -29,24 +22,24 @@ class BannerController extends Controller
             'image'         => $nameImg,
         ]);
         
-        return redirect('/admin-list-banner');
+        return redirect('admin-list-banner');
     }
 
-    public function deleteBanner($id) {
+    public function delete($id) {
 
         $myImg = Banner::find($id)->image;
         File::delete('image/banner/'.$myImg);
         Banner::find($id)->delete();
 
-        return redirect()->route('route.admin.list_banner');
+        return redirect('admin-list-banner');
     }
 
-    public function editBanner($id) {
-        $data = Banner::find($id);
-        return view('admin.edit_banner',['data' => $data]);
+    public function edit($id) {
+        $banner = Banner::find($id);
+        return view('admin.banner.edit',['banner' => $banner]);
     }
 
-    public function updateBanner(edit_bannerRequest $request, $id) {
+    public function update(edit_bannerRequest $request, $id) {
 
         $myImg = Banner::find($id)->image;
         if ($request->fileImg == null) {
@@ -63,6 +56,6 @@ class BannerController extends Controller
             'image'         => $image,
         ]);
 
-        return redirect()->route('route.admin.list_banner');
+        return redirect('admin-list-banner');
     }
 }

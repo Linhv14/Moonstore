@@ -7,43 +7,26 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\userRequest;
 use App\Http\Requests\update_userRequest;
-use App\Models\User;
+use App\Models\Users;
 
 class UserController extends Controller
 {
-    public function registerClient() {
-        return view('client.register_client');
+    public function list() {
+        $data = Users::get();
+        return view('admin.user.list',['data' => $data]);
     }
 
-    public function saveClient(userRequest $request) {
-        User::create([
-            'password'  => bcrypt($request->password),
-            'name'      => $request->name,
-            'address'   => $request->address,
-            'phone'     => $request->phone,
-            'country'   => $request->country,
-            'email'     => $request->email,
-            'city'      => $request->city, 
-        ]);
-        return redirect()->route('route.client.login_client');
+    public function delete($id) {
+        Users::find($id)->delete();
+        return redirect('admin-list-user');
     }
 
-    public function listUser() {
-        $data = User::get();
-        return view('admin.list_user',['data' => $data]);
+    public function edit($id) {
+        $data = Users::find($id);
+        return view('admin.user.edit',['data' => $data]);
     }
 
-    public function deleteUser($id) {
-        User::find($id)->delete();
-        return redirect()->route('route.admin.list_user');
-    }
-
-    public function editUser($id) {
-        $data = User::find($id);
-        return view('admin.edit_user',['data' => $data]);
-    }
-
-    public function updateUser(update_userRequest $request, $id) {
+    public function update(update_userRequest $request, $id) {
         DB::table('users')->where('id', $id)->update([
             'name'      => $request->name,            
             'phone'     => $request->phone,
@@ -51,13 +34,13 @@ class UserController extends Controller
             'country'   => $request->country,
             'city'      => $request->city,
         ]);
-        return redirect()->route('route.admin.list_user');
+        return redirect('admin-list-user');
     }
 
-    public function updateTypeUser(Request $request, $id) {
+    public function updateType(Request $request, $id) {
         DB::table('users')->where('id', $id)->update([
-            'type_user'      => $request->type_user,            
+            'type_user' => $request->type_user,            
         ]);
-        return redirect()->route('route.admin.list_user');
+        return redirect('admin-list-user');
     }
 }

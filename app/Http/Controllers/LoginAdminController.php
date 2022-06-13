@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginAdminController extends Controller
 {
-    public function loginAdmin() {
-        return view('admin.login_admin');
+    public function login() {
+        return view('admin.login');
     }
 
     public function authenticate(accountRequest $request) {
@@ -26,17 +26,17 @@ class LoginAdminController extends Controller
             || Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'type_user' => 'Staff'])) 
         {   
             $request->session()->regenerate();
-            return redirect()->route('route.admin.index');
+            return redirect('/admin-dashboard');
         }
         return back()->withErrors([
             'email' => 'Tài khoản hoặc mật khẩu không đúng.',
         ]);
     }
         
-    public function logoutAdmin(Request $request) {
+    public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('route.admin.login_admin');
+        return redirect('/login-admin');
     }  
 }

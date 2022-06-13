@@ -10,6 +10,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DeliverController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SearchController;
 
@@ -27,155 +28,158 @@ use App\Http\Controllers\SearchController;
 Route::middleware(['authAdminIn'])->group(function () {
 
     // Show Dashboard 
-    Route::get('admin-dashboard', function () {
-        return view('admin.index');
-    })->name('route.admin.index'); 
+    Route::view('admin-dashboard', 'admin.index');
     //=====================================================================
 
     // Show Categories
-    Route::get('admin-list-category', [CategoryController::class, 'listCategory'])->name('route.admin.list_category');
+    Route::view('admin-list-category', 'admin.category.list');
     // Add Category
-    Route::get('admin-add-category', [CategoryController::class, 'addCategory'])->name('route.admin.add_category');
-    Route::post('admin-add-category', [CategoryController::class, 'saveCategory'])->name('route.admin.save_category');
+    Route::view('admin-add-category', 'admin.category.add');
+    Route::post('admin-save-category', [CategoryController::class, 'save']);
     // Delete category
-    Route::get('admin-delete-category/{id}', [CategoryController::class, 'deleteCategory'])->name('route.admin.delete_category');
+    Route::get('admin-delete-category/{id}', [CategoryController::class, 'delete']);
     // Update category
-    Route::get('admin-edit-category/{id}', [CategoryController::class, 'editCategory'])->name('route.admin.edit_category');
-    Route::post('admin-update-category/{id}', [CategoryController::class, 'updateCategory'])->name('route.admin.update_category');
+    Route::get('admin-edit-category/{id}', [CategoryController::class, 'edit']);
+    Route::post('admin-update-category/{id}', [CategoryController::class, 'update']);
     //========================================================================
 
     // Show Products
-    Route::get('admin-list-product', [ProductController::class, 'listProduct'])->name('route.admin.list_product');
+    Route::get('admin-list-product', [ProductController::class, 'list']);
     // Add Product
-    Route::get('admin-add-product', [ProductController::class, 'addProduct'])->name('route.admin.add_product');
-    Route::post('admin-add-product', [ProductController::class, 'saveProduct'])->name('route.admin.save_product');
+    Route::view('admin-add-product', 'admin.product.add');
+    Route::post('admin-save-product', [ProductController::class, 'save']);
     // Delete Product
-    Route::get('admin-delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('route.admin.delete_product');
+    Route::get('admin-delete-product/{id}', [ProductController::class, 'delete']);
     // Update Product
-    Route::get('admin-edit-product/{id}', [ProductController::class, 'editProduct'])->name('route.admin.edit_product');
-    Route::post('admin-update-product/{id}', [ProductController::class, 'updateProduct'])->name('route.admin.update_product');
+    Route::get('admin-edit-product/{id}', [ProductController::class, 'edit']);
+    Route::post('admin-update-product/{id}', [ProductController::class, 'update']);
     //========================================================================
 
     // Show Banners
-    Route::get('admin-list-banner', [BannerController::class, 'listBanner'])->name('route.admin.list_banner');
+    Route::view('admin-list-banner', 'admin.banner.list');
     // Add Banner
-    Route::get('admin-add-banner', [BannerController::class, 'addBanner'])->name('route.admin.add_banner');
-    Route::post('admin-add-banner', [BannerController::class, 'saveBanner'])->name('route.admin.save_banner');
+    Route::view('admin-add-banner', 'admin.banner.add');
+    Route::post('admin-save-banner', [BannerController::class, 'save']);
     // Delete Banner
-    Route::get('admin-delete-banner/{id}', [BannerController::class, 'deleteBanner'])->name('route.admin.delete_banner');
+    Route::get('admin-delete-banner/{id}', [BannerController::class, 'delete']);
     // Update Banner
-    Route::get('admin-edit-banner/{id}', [BannerController::class, 'editBanner'])->name('route.admin.edit_banner');
-    Route::post('admin-update-banner/{id}', [BannerController::class, 'updateBanner'])->name('route.admin.update_banner');
+    Route::get('admin-edit-banner/{id}', [BannerController::class, 'edit']);
+    Route::post('admin-update-banner/{id}', [BannerController::class, 'update']);
     //======================================================================
 
     // Show Posts
-    Route::get('admin-list-post', [PostController::class, 'listPost'])->name('route.admin.list_post');
+    Route::view('admin-list-post', 'admin.post.list');
     // Add Post
-    Route::get('admin-add-post', [PostController::class, 'addPost'])->name('route.admin.add_post');
-    Route::post('admin-add-post', [PostController::class, 'savePost'])->name('route.admin.save_post');
+    Route::view('admin-add-post', 'admin.post.add');
+    Route::post('admin-save-post', [PostController::class, 'save']);
     // Delete Post
-    Route::get('admin-delete-post/{id}', [PostController::class, 'deletePost'])->name('route.admin.delete_post');
+    Route::get('admin-delete-post/{id}', [PostController::class, 'delete']);
     // Update Post
-    Route::get('admin-edit-post/{id}', [PostController::class, 'editPost'])->name('route.admin.edit_post');
-    Route::post('admin-update-post/{id}', [PostController::class, 'updatePost'])->name('route.admin.update_post');
+    Route::get('admin-edit-post/{id}', [PostController::class, 'edit']);
+    Route::post('admin-update-post/{id}', [PostController::class, 'update']);
     //========================================================================
 
     Route::middleware(['IsAdmin'])->group(function () {
         // Show Users
-        Route::get('admin-list-user', [UserController::class, 'listUser'])->name('route.admin.list_user');
+        Route::get('admin-list-user', [UserController::class, 'list']);
         // Delete User
-        Route::get('admin-delete-user/{id}', [UserController::class, 'deleteUser'])->name('route.admin.delete_user');
+        Route::get('admin-delete-user/{id}', [UserController::class, 'delete']);
         // Update User
-        Route::get('admin-edit-user/{id}', [UserController::class, 'editUser'])->name('route.admin.edit_user');
-        Route::post('admin-update-user/{id}', [UserController::class, 'updateUser'])->name('route.admin.update_user');
+        Route::get('admin-edit-user/{id}', [UserController::class, 'edit']);
+        Route::post('admin-update-user/{id}', [UserController::class, 'update']);
         // Update Type User
-        Route::post('admin-update-type-user/{id}', [UserController::class, 'updateTypeUser'])->name('route.admin.update_type_user');
+        Route::post('admin-update-type-user/{id}', [UserController::class, 'updateType']);
     });
     //========================================================================
 
     // Show Orders
-    Route::get('admin-list-order', [OrderController::class, 'listOrder'])->name('route.admin.list_order');
+    Route::get('admin-list-order', [OrderController::class, 'list']);
     // Update Order
-    Route::get('admin-edit-order/{id}', [OrderController::class, 'editOrder'])->name('route.admin.edit_order');
-    Route::post('admin-update-order/{id}', [OrderController::class, 'updateOrder'])->name('route.admin.update_order');
+    Route::get('admin-edit-order/{id}', [OrderController::class, 'edit']);
+    Route::post('admin-update-order/{id}', [OrderController::class, 'update']);
     // Delete Order
-    Route::get('admin-delete-order/{id}',[OrderController::class, 'deleteOrder'])->name('route.admin.delete_order');
-    // Delete Deliver
-    Route::get('admin-delete-deliver/{id}',[OrderController::class, 'deleteDeliver'])->name('route.admin.delete_deliver');
-    // Back to Order
-    Route::get('admin-back-to-order/{id}',[OrderController::class, 'backToOrder'])->name('route.admin.back_to_order');
+    Route::get('admin-delete-order/{id}',[OrderController::class, 'delete']);
     // Show Detail Order
-    Route::get('admin-detail-order/{id}', [OrderController::class, 'detailOrder'])->name('route.admin.detail_order');
-    // Confirm to Deliver
-    Route::get('admin-confirm-deliver/{id}', [OrderController::class, 'confirmDeliver'])->name('route.admin.confirm_deliver');
-    // Show List Delivering
-    Route::get('admin-list-deliver', [OrderController::class, 'listDeliver'])->name('route.admin.list_deliver');
+    Route::get('admin-detail-order/{id}', [OrderController::class, 'detail']);
+    // Back to Order
+    Route::get('admin-back-to-order/{id}',[OrderController::class, 'backToOrder']);
     // Confirm to Reveice
-    Route::get('admin-confirm-order/{id}', [OrderController::class, 'confirmOrder'])->name('route.admin.confirm_order');
+    Route::get('admin-confirm-order/{id}', [OrderController::class, 'confirm']);
     // Show History Orders
-    Route::get('admin-history-order', [OrderController::class, 'adminHistoryOrder'])->name('route.admin.history_order');
+    Route::get('admin-history-order', [OrderController::class, 'adminHistoryOrder']);
+
+    // Show List Delivering
+    Route::get('admin-list-deliver', [DeliverController::class, 'list']);
+    // Confirm to Deliver
+    Route::get('admin-confirm-deliver/{id}', [DeliverController::class, 'confirm']);
+    // Delete Deliver
+    Route::get('admin-delete-deliver/{id}',[DeliverController::class, 'delete']);
 });
 
 // Login Admin
-Route::get('login-admin', [LoginAdminController::class, 'loginAdmin'])->middleware('authAdminOut')->name('route.admin.login_admin');
-Route::post('login-admin', [LoginAdminController::class, 'authenticate'])->name('route.admin.login_admin_process');
+Route::get('login-admin', [LoginAdminController::class, 'login'])->middleware('authAdminOut');
+Route::post('login-admin', [LoginAdminController::class, 'authenticate']);
 
 // Logout Admin
-Route::get('logout-admin', [LoginAdminController::class, 'logoutAdmin'])->name('route.admin.logout_admin');
+Route::get('logout-admin', [LoginAdminController::class, 'logout']);
 
 // Home Page
-Route::get('/', [ClientController::class, 'showClient'])->name('route.client.index');
+Route::get('/', [LoginClientController::class, 'home']);
 
 Route::middleware(['authClientOut'])->group(function () {
     // Register Client
-    Route::get('register', [UserController::class, 'registerClient'])->name('route.client.register_client');
-    Route::post('register', [UserController::class, 'saveClient'])->name('route.client.save_client');
+    Route::get('register', [LoginClientController::class, 'register']);
+    Route::post('register', [LoginClientController::class, 'save']);
 
     // Login Client
-    Route::get('login', [LoginClientController::class, 'login'])->name('route.client.login_client');
-    Route::post('login', [LoginClientController::class, 'authenticate'])->name('route.login_client_process');
-    Route::post('redirect', [LoginClientController::class, 'redirect'])->name('route.client.redirect');
+    Route::get('login', [LoginClientController::class, 'login']);
+    Route::post('login', [LoginClientController::class, 'authenticate']);
+
+    // Change option
+    Route::post('redirect', [LoginClientController::class, 'redirect']);
 
     // Show Forget Password
-    Route::get('forget-password', [LoginClientController::class, 'fotgetPassword'])->name('route.client.forget_password');
+    Route::get('forget-password', [LoginClientController::class, 'forgetPassword']);
 });
 
 // Logout Client
-Route::get('logout-client', [LoginClientController::class, 'logoutClient'])->name('route.logout_client');
+Route::get('logout', [LoginClientController::class, 'logout']);
 
 // Process Cart
-Route::get('client-add-cart/{id}', [CartController::class, 'addCart'])->name('route.client.add_cart');
-Route::get('product/client-add-cart/{id}', [CartController::class, 'addCart'])->name('route.client.product.add_cart');
-Route::get('category/client-add-cart/{id}', [CartController::class, 'addCart'])->name('route.client.category.add_cart');
-Route::get('client-add-cart-item', [CartController::class, 'addCartItem'])->name('route.client.add_cart_item');
+Route::get('client-add-cart/{id}', [CartController::class, 'add']);
+Route::get('product/client-add-cart/{id}', [CartController::class, 'add']);
+Route::get('category/client-add-cart/{id}', [CartController::class, 'add']);
+Route::get('client-add-cart-item', [CartController::class, 'addItem']);
 
-Route::get('client-delete-cart/{id}', [CartController::class, 'deleteCart'])->name('route.client.delete_cart');
-Route::get('product/client-delete-cart/{id}', [CartController::class, 'deleteCart'])->name('route.client.product.delete_cart');
-Route::get('category/client-delete-cart/{id}', [CartController::class, 'deleteCart'])->name('route.client.category.delete_cart');
-Route::get('client-delete-cart-item/{id}', [CartController::class, 'deleteCartItem'])->name('route.client.delete_cart_item');
-Route::get('client-update-cart-item/{id}/{quanty}', [CartController::class, 'updateCartItem'])->name('route.client.update_cart');
+Route::get('client-delete-cart/{id}', [CartController::class, 'delete']);
+Route::get('client-delete-cart-item/{id}', [CartController::class, 'deleteItem']);
+
+Route::get('product/client-delete-cart/{id}', [CartController::class, 'delete']);
+Route::get('category/client-delete-cart/{id}', [CartController::class, 'delete']);
+
+Route::get('client-update-cart-item/{id}/{quanty}', [CartController::class, 'updateItem']);
 
 // Show Cart
-Route::get('cart', [CartController::class, 'showCart'])->name('route.client.cart');
+Route::view('cart', 'client.cart');
 
 // Show Product Detail
-Route::get('product/{id}', [ProductController::class, 'showProductDetail'])->name('route.client.product_detail');
+Route::get('product/{id}', [ProductController::class, 'detail']);
 
 // Checkout 
 Route::middleware(['authClientIn'])->group(function () {
-    Route::get('checkout', [CartController::class, 'checkout'])->name('route.client.checkout');
-    Route::post('order-confirm', [CartController::class, 'confirmOrder'])->name('route.client.order_confirm');
-    Route::get('order', [CartController::class, 'showOrder'])->name('route.client.order');    
-    Route::get('history-order', [OrderController::class, 'clientHistoryOrder'])->name('route.client.history_order');    
+    Route::get('checkout', [CartController::class, 'checkout']);
+    Route::post('order-confirm', [CartController::class, 'confirm']);
+
+    Route::get('order', [OrderController::class, 'show']);    
+    Route::get('history-order', [OrderController::class, 'clientHistoryOrder']);    
 });
 
 // Show Sort Category
-Route::get('category/sort/', [CategoryController::class, 'fillterCategory']);
-
+Route::get('category/sort/', [CategoryController::class, 'sort']);
 // Show Category
-Route::get('category/find/{id}', [CategoryController::class, 'showCategory']);
+Route::get('category/find/{id}', [CategoryController::class, 'show']);
 // Show Category
-Route::get('category/{type}', [CategoryController::class, 'showTypeCategory']);
+Route::get('category/{type}', [CategoryController::class, 'query']);
 
 Route::get('search', [SearchController::class, 'search']);
 

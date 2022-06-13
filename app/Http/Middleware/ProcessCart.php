@@ -19,7 +19,7 @@ class ProcessCart
     {
 
         if (!Auth::check()) {           
-            return redirect()->route('route.client.login_client');
+            return redirect('login');
         } else {
             return $next($request);
         }

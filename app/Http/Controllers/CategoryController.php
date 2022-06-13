@@ -11,49 +11,41 @@ use File;
 
 class CategoryController extends Controller
 {
-    public function listCategory() {
-        return view('admin.list_category'); 
-    }
+    public function save(categoryRequest $request) {
 
-    public function addCategory() {
-        return view('admin.add_category');
-    }
-
-    public function saveCategory(categoryRequest $request) {
-
-        $nameImg = $request->fileImg->getClientOriginalName();
+        $nameIamge = $request->fileImg->getClientOriginalName();
         $file = $request->file('fileImg');
-        $file->move('image/category', $nameImg);
+        $file->move('image/category', $nameIamge);
 
         Category::create([
             'name'  => $request->name,
-            'image' => $nameImg,
+            'image' => $nameIamge,
         ]);
         
-        return redirect()->route('route.admin.list_category');
+        return redirect('admin-list-category');
     }
 
-    public function deleteCategory($id) {
+    public function delete($id) {
 
-        $myImg = Category::find($id)->image;
-        File::delete('image/category/'.$myImg);
+        $nameImage = Category::find($id)->image;
+        File::delete('image/category/'.$nameImage);
         Category::find($id)->delete();
 
-        return redirect()->route('route.admin.list_category');
+        return redirect('admin-list-category');
     }
 
-    public function editCategory($id) {
-        $data = Category::find($id);
-        return view('admin.edit_category',['data' => $data]);
+    public function edit($id) {
+        $category = Category::find($id);
+        return view('admin.category.edit',['category' => $category]);
     }
 
-    public function updateCategory(edit_categoryRequest $request, $id) {
+    public function update(edit_categoryRequest $request, $id) {
 
-        $myImg = Category::find($id)->image;
+        $oldImage = Category::find($id)->image;
         if ($request->fileImg == null) {
-            $image = $myImg;
+            $image = $oldImage;
         } else {
-            File::delete('image/category/'.$myImg);
+            File::delete('image/category/'.$oldImage);
             $image = $request->fileImg->getClientOriginalName();
             $file = $request->file('fileImg');
             $file->move('image/category',$image);
@@ -64,10 +56,10 @@ class CategoryController extends Controller
             'image' => $image,
         ]);
 
-        return redirect()->route('route.admin.list_category');
+        return redirect('admin-list-category');
     }
 
-    public function fillterCategory(Request $request) {
+    public function sort(Request $request) {
 
         $sort_type = $request->sort;
         $limit = $request->limit;
@@ -88,7 +80,7 @@ class CategoryController extends Controller
                 ->limit($limit)
                 ->get();
                 break;
-            case 'Price asc':
+            case 'price asc':
                 $product = DB::table('product')
                 ->leftJoin('category', 'product.category', '=', 'category.id')
                 ->select('product.*', 'category.name')
@@ -96,7 +88,7 @@ class CategoryController extends Controller
                 ->limit($limit)
                 ->get();
                 break;
-            case 'Price desc':
+            case 'price desc':
                 $product = DB::table('product')
                 ->leftJoin('category', 'product.category', '=', 'category.id')
                 ->select('product.*', 'category.name')
@@ -116,7 +108,7 @@ class CategoryController extends Controller
     }
 
 
-    public function showCategory($id) {
+    public function show($id) {
 
         $product = DB::table('product')
         ->leftJoin('category', 'product.category', '=', 'category.id')
@@ -126,7 +118,7 @@ class CategoryController extends Controller
         return view('client.category', ['product' => $product]);
     }
 
-    public function showTypeCategory($type) {
+    public function query($type) {
 
         switch ($type) {
             case 'all':

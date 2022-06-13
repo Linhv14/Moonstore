@@ -21,7 +21,7 @@ class AuthAdminOut
             $type_user = Auth::user()->type_user;  
             if ($type_user == 'Admin' || $type_user == 'Staff')
             {
-                return redirect()->route('route.admin.index');
+                return redirect('/admin-dashboard');
             } else {
                 return $next($request);
             }   

@@ -10,17 +10,7 @@ use File;
 
 class PostController extends Controller
 {
-    public function listPost() {
-        $data = Post::get();
-        return view('admin.list_post',['data' => $data]);
-  
-    }
-
-    public function addPost() {
-        return view('admin.add_post');
-    }
-
-    public function savePost(postRequest $request) {
+    public function save(postRequest $request) {
 
         $nameImg = $request->fileImg->getClientOriginalName();
         $file = $request->file('fileImg');
@@ -34,22 +24,22 @@ class PostController extends Controller
             'image'         => $nameImg,
         ]);
         
-        return redirect()->route('route.admin.list_post');
+        return redirect('admin-list-post');
     }
 
-    public function deletePost($id) {
+    public function delete($id) {
         $myImg = Post::find($id)->image;
         File::delete('image/post/'.$myImg);
         Post::find($id)->delete();
-        return redirect()->route('route.admin.list_post');
+        return redirect('admin-list-post');
     }
 
-    public function editPost($id) {
-        $data = Post::find($id);
-        return view('admin.edit_post',['data' => $data]);
+    public function edit($id) {
+        $post = Post::find($id);
+        return view('admin.post.edit',['post' => $post]);
     }
 
-    public function updatePost(edit_postRequest $request, $id) { 
+    public function update(edit_postRequest $request, $id) { 
         $myImg = Post::find($id)->image;
         if ($request->fileImg == null) {
             $image = $myImg;
@@ -67,6 +57,6 @@ class PostController extends Controller
             'image'         => $image,
         ]);
 
-      return redirect()->route('route.admin.list_post');
+      return redirect('admin-list-post');
     }
 }

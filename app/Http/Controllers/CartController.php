@@ -14,12 +14,8 @@ use Carbon\Carbon;
 use Session;
 
 class CartController extends Controller
-{
-    public function showCart() {
-        return view('client.cart');
-    }
-    
-    public function addCart(Request $request, $id) {
+{ 
+    public function add(Request $request, $id) {
         $product = Product::find($id);
         if ($product != null) {
             $oldCart = Session('Cart') ? Session('Cart') : null;
@@ -31,13 +27,12 @@ class CartController extends Controller
         return view('client.client_cart',['Cart' => $newCart]);
     }
 
-    public function addCartItem() {
+    public function addItem() {
         $cart = Session('Cart') ? Session('Cart') : null;
-        
         return view('client.cart_ajax',['Cart' => $cart]);
     }
 
-    public function deleteCart(Request $request, $id) {
+    public function delete(Request $request, $id) {
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new Cart($oldCart);
         $newCart->deleteCart($id);
@@ -50,7 +45,7 @@ class CartController extends Controller
         return view('client.client_cart',['Cart' => $newCart]);
     }
 
-    public function deleteCartItem(Request $request, $id) {
+    public function deleteItem(Request $request, $id) {
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new Cart($oldCart);
         $newCart->deleteCart($id);
@@ -63,7 +58,7 @@ class CartController extends Controller
         return view('client.cart_ajax',['Cart' => $newCart]);
     }
 
-    public function updateCartItem(Request $request, $id, $quanty) {
+    public function updateItem(Request $request, $id, $quanty) {
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new Cart($oldCart);
         $newCart->updateCart($id, $quanty);
@@ -77,8 +72,8 @@ class CartController extends Controller
         $bill = null;
         $category = [];
           
-        if (DB::table('bill')->where('customer_id', $user_id)->exists()) {
-            $bill = DB::table('bill')->where('customer_id', $user_id)->first();
+        if (DB::table('bill')->where('user_id', $user_id)->exists()) {
+            $bill = DB::table('bill')->where('user_id', $user_id)->first();
         }
 
         $carts = $request->session()->get('Cart');
@@ -98,12 +93,12 @@ class CartController extends Controller
         ]);    
     }
 
-    public function confirmOrder(orderRequest $request) { 
+    public function confirm(orderRequest $request) { 
         
         $user_id = Auth::user()->id;
         $time = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
         $bill = Bill::create([
-            'customer_id'   => $user_id,
+            'user_id'   => $user_id,
             'fullname'      => $request->fullname,
             'phone'         => $request->phone,
             'address'       => $request->address,
@@ -123,48 +118,6 @@ class CartController extends Controller
 
         $request->Session()->forget('Cart');
         
-        return redirect()->route('route.client.order');
+        return redirect('/order');
     }
-
-    public function showOrder() {
-        $user_id = Auth::user()->id;
-
-        if (DB::table('bill')
-            ->where([['customer_id', $user_id],['status', 'Đang chờ xử lý']])
-            ->orWhere([['customer_id', $user_id],['status', 'Đang giao']])
-            ->exists()) {
-            $data = [];
-            $bills = DB::table('bill')
-                ->where([['customer_id', $user_id],['status', 'Đang chờ xử lý']])
-                ->orWhere([['customer_id', $user_id],['status', 'Đang giao']])
-                ->get();
-
-            foreach($bills as $bill) {
-                $orders = DB::table('orders')
-                ->join('product', 'product_id', '=', 'product.id')
-                ->join('category', 'category', 'category.id')
-                ->where([['orders.bill_id', $bill->bill_id]])
-                ->select('orders.*', 'product.*', 'category.name')
-                ->get(); 
-
-                $totalPrice = 0;
-                foreach ($orders as $order) {
-                    $totalPrice += ($order->price * $order->quantity); 
-                }   
-
-                $data[] = [
-                    'orders'      => $orders,
-                    'totalPrice'  => $totalPrice,
-                ];
-            }
-
-            return view('client.order', [
-                'bills'         => $bills,
-                'data'          => $data,
-            ]);
-        } 
-        return view('client.order_empty');         
-    }
-
-    
 }
