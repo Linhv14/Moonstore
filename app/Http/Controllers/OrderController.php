@@ -123,18 +123,18 @@ class OrderController extends Controller
         $user_id = Auth::user()->id;
 
         if (DB::table('bill')
-            ->where([['order_id', $user_id],['status', 'Đã giao']])
+            ->where([['user_id', $user_id],['status', 'Đã giao']])
             ->exists()) {
             $data = [];
             $bills = DB::table('bill')
-                ->where([['order_id', $user_id],['status', 'Đã giao']])
+                ->where([['user_id', $user_id],['status', 'Đã giao']])
                 ->get();
 
             foreach($bills as $bill) {
                 $orders = DB::table('orders')
                 ->join('product', 'product_id', '=', 'product.id')
                 ->join('category', 'category', 'category.id')
-                ->where([['orders.bill_id', $bill->bill_id]])
+                ->where([['orders.bill_id', $bill->id]])
                 ->select('orders.*', 'product.*', 'category.name')
                 ->get();
 
